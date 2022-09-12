@@ -9,7 +9,6 @@ caracteristicas - Funções para obtenção das características do grafo e oper
 12/09/2022  
 ===================================================='''
 
-from asyncio.windows_events import NULL
 import numpy as np
 
 '''Verifica Adjacência: Função que verifica se os vértices vi e vj são adjacentes.
@@ -115,10 +114,6 @@ def insereAresta(matriz, vi, vj):
     if tipo == 1: # se for digrafo
         matriz[vi][vj] = 1 #recebe 1 no lugar desejado
 
-    # elif tipo == 0:
-    #     matriz[vi][vj] = 1
-    #     matriz[vj][vi] = 1
-
     elif vi == vj:
         matriz[vi][vj] += 1 # ser for uma aresta de um so vertice nao precisa de simetria
 
@@ -147,19 +142,27 @@ def removeAresta(matriz, vi, vj):
 Entrada: matriz de adjacências, vi (número inteiro que indica o id do vértice)
 Saída: matriz de adjacências (tipo numpy.ndarray) com o vértice inserido.'''
 def insereVertice(matriz, vi):
-    if matriz[vi][vi] == NULL:
-        print('Matriz ja possui esse id')
-    else:
-        for i in vi-1:
-            matriz[vi-1][i] = 0
-            matriz[i][vi-1] = 0
+    print('vertice', vi, "adicionado no grafo!")
+    colunas = len(matriz[0])
+    row = []
+    for i in range(colunas):
+        row.append(0)  
+    matriz = np.append(matriz, [row], axis = 0)
+
+    linhas = len(matriz)
+    colunas = []
+    for j in range(linhas):
+        colunas.append([0])
+    matriz = np.append(matriz, colunas, axis = 1)
     return matriz
 
 '''Descrição: Remove um vértice do grafo.
 Entrada: matriz de adjacências, vi (número inteiro que indica o id do vértice)
 Saída: matriz de adjacências (tipo numpy.ndarray) com o vértice removido.'''
 def removeVertice(matriz, vi):
-
+    print('vertice', vi, 'removido do grafo')
+    matriz = np.delete(matriz, vi, axis=1) # deleta a coluna
+    matriz = np.delete(matriz, vi, axis=0) # deleta a linha
     return matriz
     
     

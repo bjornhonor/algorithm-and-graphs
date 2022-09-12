@@ -25,24 +25,39 @@ def main(instancia):
 
     vis.visualizarGrafo(True, G)  # True para visualização do grafo ou False.
     funcao0 = car.tipoGrafo(matriz)
-    match funcao0:
-        case 0:
-            print('Grafo simples', '\n')
-        case 1:
-            print('Digrafo', '\n')
-        case 2:
-            print('Multigrafo', '\n')
-        case 3:
-            print('Pseudografo', '\n')
+    # match funcao0: so pode ser utilizada em python3.10 ou superior
+    #     case 0:
+    #         print('Grafo simples', '\n')
+    #     case 1:
+    #         print('Digrafo', '\n')
+    #     case 2:
+    #         print('Multigrafo', '\n')
+    #     case 3:
+    #         print('Pseudografo', '\n')
+    if funcao0 == 0:
+        print('Grafo simples', '\n')
+    elif funcao0 == 1:
+        print('Digrafo', '\n')
+    elif funcao0 == 2:
+        print('Multigrafo', '\n')
+    elif funcao0 == 3:
+         print('Pseudografo', '\n')
+
     funcao1 = car.verificaAdjacencia(matriz, 0, 1)
     funcao2 = car.calcDensidade(matriz)
 
-    # print(matriz)
+    # print(matriz) #-> inserir aresta
     # matriz = car.insereAresta(matriz, 0, 1)
     # print(matriz)
-    print(matriz)
-    matriz = car.removeAresta(matriz, 0, 1)
-    print(matriz)
+    # print(matriz) #-> remover aresta
+    # matriz = car.removeAresta(matriz, 0, 1)
+    # print(matriz)
+    # print(matriz) #-> inserir vertice
+    # matriz = car.insereVertice(matriz, 4)
+    # print(matriz)
+    # print(matriz) #-> remover vertice
+    # matriz = car.removeVertice(matriz, 0)
+    # print(matriz)
 
     resultado = [instancia, funcao0, funcao1, funcao2] # Lista de tipo misto com valores dos resultados
     ds.salvaResultado(resultado) # Salva resultado em arquivo
