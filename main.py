@@ -37,6 +37,13 @@ def main(instancia):
     funcao1 = car.verificaAdjacencia(matriz, 0, 1)
     funcao2 = car.calcDensidade(matriz)
 
+    # print(matriz)
+    # matriz = car.insereAresta(matriz, 0, 1)
+    # print(matriz)
+    print(matriz)
+    matriz = car.removeAresta(matriz, 0, 1)
+    print(matriz)
+
     resultado = [instancia, funcao0, funcao1, funcao2] # Lista de tipo misto com valores dos resultados
     ds.salvaResultado(resultado) # Salva resultado em arquivo
 

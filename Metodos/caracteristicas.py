@@ -113,18 +113,18 @@ Saída: matriz de adjacências (tipo numpy.ndarray) com a aresta inserida.'''
 def insereAresta(matriz, vi, vj):
     tipo = tipoGrafo(matriz)
     if tipo == 1: # se for digrafo
-        matriz[vi-1][vj-1] = 1 #recebe 1 no lugar desejado
+        matriz[vi][vj] = 1 #recebe 1 no lugar desejado
 
-    elif tipo == 0:
-        matriz[vi-1][vj-1] = 1
-        matriz[vj-1][vi-1] = 1
+    # elif tipo == 0:
+    #     matriz[vi][vj] = 1
+    #     matriz[vj][vi] = 1
 
     elif vi == vj:
-        matriz[vi-1][vj-1] += 1 # ser for uma aresta de um so vertice nao precisa de simetria
+        matriz[vi][vj] += 1 # ser for uma aresta de um so vertice nao precisa de simetria
 
     else: # se for qualquer grafo que nao seja direcionado
-        matriz[vi-1][vj-1] += 1 # soma 1 aresta, podendo iniciar uma aresta ou transformar em multigrafo, adicionando mais uma aresta
-        matriz[vj-1][vi-1] += 1 # mesma operacao, mas para deixar a matriz simetrica
+        matriz[vi][vj] += 1 # soma 1 aresta, podendo iniciar uma aresta ou transformar em multigrafo, adicionando mais uma aresta
+        matriz[vj][vi] += 1 # mesma operacao, mas para deixar a matriz simetrica
     print('Aresta entre os pontos', vi, 'e', vj, 'criada com sucesso')    
     return matriz
 
@@ -133,13 +133,13 @@ Entrada: matriz de adjacências, vi e vj (ambos são números inteiros que indic
 Saída: matriz de adjacências (tipo numpy.ndarray) com a aresta removida.'''
 def removeAresta(matriz, vi, vj):
     tipo = tipoGrafo(matriz)
-    if tipo == 1: # se for digrafo
-        matriz[vi-1][vj-1] = 0 #recebe 1 no lugar desejado
-    elif vi == vj and vi > 0 and vj > 0:
-        matriz[vi-1][vj-1] -= 1 # se for uma aresta de um so vertice nao precisa ser simetrico
-    elif vi > 0 and vj > 0: # se for qualquer grafo que nao seja direcionado
-        matriz[vi-1][vj-1] -= 1 # subtrai 1 aresta, podendo retirar uma aresta de um multagrafo, ou apenas remover a aresta
-        matriz[vj-1][vi-1] -= 1 # mesma operacao, mas para deixar a matriz simetrica
+    if tipo == 1 and matriz[vi][vj] > 0: # se for digrafo
+        matriz[vi][vj] -= 1 #recebe 0 no lugar desejado
+    elif vi == vj and matriz[vi][vj] > 0:
+        matriz[vi][vj] -= 1 # se for uma aresta de um so vertice nao precisa ser simetrico
+    elif matriz[vi][vj] > 0: # se for qualquer grafo que nao seja direcionado
+        matriz[vi][vj] -= 1 # subtrai 1 aresta, podendo retirar uma aresta de um multagrafo, ou apenas remover a aresta
+        matriz[vj][vi] -= 1 # mesma operacao, mas para deixar a matriz simetrica
     print('Aresta entre os pontos', vi, 'e', vj, 'removida com sucesso')
     return matriz
 
